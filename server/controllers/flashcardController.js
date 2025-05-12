@@ -2,6 +2,10 @@
 
 const db = require('../db');
 const { fetchAllFlashcards } = require('../models/flashcardModel');
+
+const baseRoute = async (req, res) => {
+    res.json('backend server running')
+  };
   
   const getAllFlashcards = async (req, res) => {
     const flashcards = await fetchAllFlashcards();
@@ -20,6 +24,7 @@ const { fetchAllFlashcards } = require('../models/flashcardModel');
   }
   
   module.exports = {
+    baseRoute,
     getAllFlashcards,
     getFilteredFlashcards
   };

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './flashcard.css'; // for styles
 
-export function Flashcard({ question, answer, category }) {
+export function Flashcard({ question, answer, category, level}) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -11,6 +11,7 @@ export function Flashcard({ question, answer, category }) {
         <div className="front">
         <div className='category-label'> {category}
         </div>
+          <p>{level}</p>
           <p>{question}</p>
         </div>
         <div className="back">
