@@ -5,31 +5,33 @@ import { Flashcard } from './flashcard'
 
 const Flashcards = () => {
     const [cards, setCards] = useState([])
-    const [filters, setFilters] = useState({ 'category': ['Math'], 'level': ['Medium'] });
+    const [filteredCards, setFilteredCards] = useState([])
+    const [filters, setFilters] = useState({ "filters" : { "category": ["ALL"], "level": ["ALL"] } });
 
     useEffect(() => {
       fetchAllFlashcards()
         .then(data => setCards(data))
-        .catch(err => console.error(err));
+        .catch(err => console.error(err)); 
     }, []);
   
     // 2b. Load filtered flashcards when filters change
     useEffect(() => {
       fetchFilteredFlashcards(filters)
-        .then(data => setCards(data))
+        .then(data => setFilteredCards(data))
         .catch(err => console.error(err));
     }, [filters]);
 
     const categories = ['ALL', ... new Set(cards.map(card => card.category))]
-    const levels = ['ALL', ... new Set(cards.map(card => card.level))]
+    const levels = ['ALL', ... new Set(cards.map(card => card.level))]   
 
     const handleCheckBoxChange_filter = (category, filter_name) => {
-      if (filters[filter_name].includes(category)) {
-        filters[filter_name].filter(c => c !== category)
-        setFilters(filters)
+      const updatedFilters = { ...filters };
+      if (updatedFilters['filters'][filter_name].includes(category)) {
+        updatedFilters['filters'][filter_name] = updatedFilters['filters'][filter_name].filter(c => c !== category)
+        setFilters(updatedFilters)
       } else {
-        filters[filter_name] = [...filters[filter_name], category]
-        setFilters(filters)
+        updatedFilters['filters'][filter_name] = [...updatedFilters['filters'][filter_name], category]
+        setFilters(updatedFilters)
       }
     }
 
@@ -42,22 +44,22 @@ const Flashcards = () => {
       </label>
           {categories.map(cat => (
           <label key = {cat} style={{ display: 'block' }}>
-          <input type = 'checkbox' value={cat} checked = {filters['category'].includes(cat)} onChange={() => handleCheckBoxChange_filter(cat, 'category')}/>
+          <input type = 'checkbox' value={cat} checked = {filters['filters']['category'].includes(cat)} onChange={() => handleCheckBoxChange_filter(cat, 'category')}/>
           {cat}
           </label>
           ))}
       <label>
-        Filter by level
+        Filter by level 
       </label>
           {levels.map(cat => (
           <label key = {cat} style={{ display: 'block' }}>
-          <input type = 'checkbox' value={cat} checked = {filters['level'].includes(cat)} onChange={() => handleCheckBoxChange_filter(cat, 'level')}/>
+          <input type = 'checkbox' value={cat} checked = {filters['filters']['level'].includes(cat)} onChange={() => handleCheckBoxChange_filter(cat, 'level')}/>
           {cat}
           </label>
-          ))}
+          ))} 
       <div>
       {
-        cards.map((card, index) => (
+        filteredCards.map((card, index) => (
             <Flashcard key = {index} question = {card.question} answer = {card.answer} category={card.category} level = {card.level} />
         ))
       }

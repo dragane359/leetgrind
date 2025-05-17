@@ -13,16 +13,34 @@ const baseRoute = async (req, res) => {
   };
 
   const getFilteredFlashcards = async (req, res) => {
-    const filters_dict = req.body.filters
-    // filters will be a dict with key being name of filter and values being a list of the values to be filtered in
-    let flashcards = await getAllFlashcards();
-    for (let key in filters_dict) {
-        filter_values = filters_dict[key]
-        flashcards = flashcards.filter(card => filter_values.includes(card[key]))
-    }
-    res.json(flashcards)
-  }
+    try {
+      console.log('Request body:', req.body);
   
+      const filters_dict = req.body.filters;
+
+  
+      if (!filters_dict || typeof filters_dict !== 'object') {
+        return res.status(400).json({ error: 'Invalid or missing filters' });
+      }
+  
+      var flashcards = await fetchAllFlashcards();
+
+  
+      for (const key in filters_dict) {
+        const filter_values = filters_dict[key];
+        if (filter_values.includes('ALL')) {
+          continue
+        }
+        flashcards = flashcards.filter(card => filter_values.includes(card[key]));
+      } 
+  
+      res.json(flashcards); 
+    } catch (error) {
+      console.error('Error in getFilteredFlashcards:', error); 
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }; 
+   
   module.exports = {
     baseRoute,
     getAllFlashcards,

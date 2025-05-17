@@ -8,7 +8,7 @@ const PORT = 3000;
 
 
 app.use(cors({
-    origin: 'http://localhost:5174', // only allow this origin
+    origin: 'http://localhost:5173', // only allow this origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // allow specific HTTP methods
   }));
   
