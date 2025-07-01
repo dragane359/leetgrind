@@ -16,3 +16,14 @@ export const fetchFilteredFlashcards = async (filters) => {
   if (!res.ok) throw new Error('Failed to fetch filtered flashcards');
   return res.json();
 };
+
+export const addNewFlashCard = async (new_card_info) => {
+  console.log(new_card_info)
+  const res = await fetch(`${API_BASE}/add_flashcard`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(new_card_info)
+  });
+  if (!res.ok) throw new Error('Failed to add new flashcard');
+  return res.json();
+}

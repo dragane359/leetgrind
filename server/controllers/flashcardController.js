@@ -40,10 +40,31 @@ const baseRoute = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }; 
+
+  const addNewFlashcard = async (req, res) => {
+    console.log('here')
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+    });
+
+    const new_flashcard = req.body.new_flashcard
+
+    console.log('here', new_flashcard)
+
+    connection.query(`
+      INSERT INTO flashcards (question, answer, category, level)
+      VALUES
+        (${new_flashcard.question}, ${new_flashcard.answer}, ${new_flashcard.category}, ${new_flashcard.level})
+    `);
+    res.status(200)
+  } 
    
   module.exports = {
     baseRoute,
     getAllFlashcards,
-    getFilteredFlashcards
+    getFilteredFlashcards,
+    addNewFlashcard
   };
    
