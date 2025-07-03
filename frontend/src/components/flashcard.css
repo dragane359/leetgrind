@@ -3,7 +3,7 @@
 .flashcard-container {
     perspective: 1000px;
     width: 300px;
-    height: 200px;
+    height: 300px;
     margin: 1rem auto;
     cursor: pointer;
   }
@@ -32,7 +32,7 @@
     border: 1px solid #0e0000;
     border-radius: 0.5rem;
     backface-visibility: hidden;
-    display: flex;
+    display: inline-flexbox;
     justify-content: center;
     align-items: center;
     font-size: 1.25rem;
@@ -41,7 +41,7 @@
     align-items: center;   
   }
 
- .category-label {
+ .flashcard .category-label {
     font-size: 0.9rem;
     color: #edf2f4;
   background: rgba(0, 0, 0, 0.05);

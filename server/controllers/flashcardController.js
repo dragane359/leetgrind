@@ -1,7 +1,10 @@
 // controllers/flashcardController.js
-
+require('dotenv').config();  // top of your file
 const db = require('../db');
+const mysql = require('mysql2/promise');
 const { fetchAllFlashcards } = require('../models/flashcardModel');
+const { v4: uuidv4 } = require('uuid');
+
 
 const baseRoute = async (req, res) => {
     res.json('backend server running')
@@ -10,11 +13,11 @@ const baseRoute = async (req, res) => {
   const getAllFlashcards = async (req, res) => {
     const flashcards = await fetchAllFlashcards();
     res.json(flashcards)
-  };
+  }; 
 
   const getFilteredFlashcards = async (req, res) => {
     try {
-      console.log('Request body:', req.body);
+      console.log('Request body:', req.body); 
   
       const filters_dict = req.body.filters;
 
@@ -42,29 +45,30 @@ const baseRoute = async (req, res) => {
   }; 
 
   const addNewFlashcard = async (req, res) => {
-    console.log('here')
+
     const connection = await mysql.createConnection({
       host: 'localhost',
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      user: process.env.REACT_APP_DB_USERNAME,
+      password: process.env.REACT_APP_DB_PASSWORD,
     });
 
-    const new_flashcard = req.body.new_flashcard
+    const new_flashcard = req.body.new_flashcard 
 
     console.log('here', new_flashcard)
 
+    await connection.query(`USE flashcards_db`);
     connection.query(`
-      INSERT INTO flashcards (question, answer, category, level)
+      INSERT INTO flashcards (id, question, answer, category, level)
       VALUES
-        (${new_flashcard.question}, ${new_flashcard.answer}, ${new_flashcard.category}, ${new_flashcard.level})
-    `);
+        ("${uuidv4()}", "${new_flashcard.question}", "${new_flashcard.answer}", "${new_flashcard.category}", "${new_flashcard.level}")
+    `); 
     res.status(200)
   } 
    
   module.exports = {
     baseRoute,
     getAllFlashcards,
-    getFilteredFlashcards,
+    getFilteredFlashcards, 
     addNewFlashcard
   };
    

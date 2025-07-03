@@ -39,6 +39,3 @@ coverage/
 # Misc
 *.local
 *.swp
-
-server/seed.js
-server/db.js
