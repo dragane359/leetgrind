@@ -60,7 +60,7 @@ const Flashcards = () => {
       <div>
       {
         filteredCards.map((card, index) => (
-            <Flashcard key = {index} question = {card.question} answer = {card.answer} category={card.category} level = {card.level} />
+            <Flashcard key = {index} id = {card.id} question = {card.question} answer = {card.answer} category={card.category} level = {card.level} />
         ))
       }
       </div>

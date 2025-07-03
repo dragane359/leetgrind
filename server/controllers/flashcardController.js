@@ -54,8 +54,6 @@ const baseRoute = async (req, res) => {
 
     const new_flashcard = req.body.new_flashcard 
 
-    console.log('here', new_flashcard)
-
     await connection.query(`USE flashcards_db`);
     connection.query(`
       INSERT INTO flashcards (id, question, answer, category, level)
@@ -64,11 +62,32 @@ const baseRoute = async (req, res) => {
     `); 
     res.status(200)
   } 
-   
+
+  const deleteFlashcard = async (req, res) => {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: process.env.REACT_APP_DB_USERNAME,
+        password: process.env.REACT_APP_DB_PASSWORD,
+      });
+      console.log(req.params.id)
+
+      const id_to_delete  = req.params.id
+
+      await connection.query(`USE flashcards_db`);
+      console.log(id_to_delete)
+ 
+      connection.query(`
+        DELETE FROM flashcards WHERE id = '${id_to_delete}'
+      `);  
+      res.status(200)
+
+  }
+    
   module.exports = {
     baseRoute,
-    getAllFlashcards,
+    getAllFlashcards, 
     getFilteredFlashcards, 
-    addNewFlashcard
+    addNewFlashcard,
+    deleteFlashcard
   };
    

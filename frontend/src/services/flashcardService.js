@@ -18,7 +18,7 @@ export const fetchFilteredFlashcards = async (filters) => {
 };
 
 export const addNewFlashCard = async (new_card_info) => {
-  console.log(new_card_info)
+
   const res = await fetch(`${API_BASE}/add_flashcard`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -26,4 +26,12 @@ export const addNewFlashCard = async (new_card_info) => {
   });
   if (!res.ok) throw new Error('Failed to add new flashcard');
   return res.json();
+}
+
+export const deleteFlashcard = async (card_id) => {
+    const res = await fetch(`${API_BASE}/flashcards/${card_id}`, {
+      method: 'DELETE'
+    });
+    if (!res.ok) throw new Error('Failed to delete flashcard');
+    return res.json();
 }
