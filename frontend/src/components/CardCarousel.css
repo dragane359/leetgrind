@@ -1,0 +1,50 @@
+.carousel-container {
+    position: relative;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-window {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+  }
+  
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: black;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .nav.left {
+    left: -90px; /* Adjusted to move it outside */
+  }
+  
+  .nav.right {
+    right: -90px; /* Adjusted to move it outside */
+  }
+  
