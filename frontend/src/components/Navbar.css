@@ -1,0 +1,21 @@
+.nav {
+    position: absolute;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #111;
+    color: white;
+}
+  
+.links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+  }
+  
+.link {
+    color: white;
+    text-decoration: none;
+}
+  
