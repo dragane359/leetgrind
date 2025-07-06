@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 export function Navbar() {
   return (
-    <nav className="nav">
+    <nav className="navbar">
       <ul className="links">
         <li><Link to="/" className="link">Home</Link></li>
         <li><Link to="/flashcards" className="link">Flashcards</Link></li>

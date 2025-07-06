@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Navbar/>
-      <div style={{ paddingTop: '30px' }}>
+      <div style={{ padding: '1rem' }}>
         <Routes>
           <Route path="/" element={<FlashcardsPage />} />
           <Route path="/flashcards" element={<FlashcardsPage />} />

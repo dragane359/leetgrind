@@ -36,31 +36,42 @@ const CreateFlashcard = () => {
         })
         // setFormData(sample_card_data)
     }
+
+    const convert_first_letter_upper = (word) => {
+        const new_word = word[0].toUpperCase() + word.slice(1)
+        console.log(new_word)
+        return new_word
+    }
  
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+        <h2>
+            Create a new Flashcard
+        </h2>
+        <form onSubmit={handleSubmit}>
 
-        {
-        card_attributes.map((form_item) => (
-            <div key = {form_item}>
-                <label> {form_item}: </label>
-                <input 
-                    type = 'text'
-                    name = {form_item}
-                    value={formData[form_item]}
-                    onChange={handleChange}
-                />
+            {
+            card_attributes.map((form_item) => (
+                <div key = {form_item}>
+                    <label> {convert_first_letter_upper(form_item)}: </label>
+                    <input 
+                        type = 'text'
+                        name = {form_item}
+                        value={formData[form_item]}
+                        onChange={handleChange}
+                    />
 
-            </div>
-        ))
-        }
-    <button type='submit'>
-        <h3>
-            Submit
-        </h3>
-    </button>
-    </form>
+                </div>
+            ))
+            }
+        <button type='submit'>
+            <h3>
+                Submit
+            </h3>
+        </button>
+        </form>
+    </>
   )
 }
 
