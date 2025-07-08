@@ -4,17 +4,19 @@
     left: 0;
     right: 0;
     width: 100vw;             /* 100% of viewport width */
-    height: 60px;
+    height: 1 rem;
     background-color: #111;   /* dark background */
     color: white;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0 1rem;
     z-index: 1000;
 }
   
 .links {
     display: flex;
+    flex-direction: row; 
     list-style: none;
     gap: 1rem;
     align-items: center;

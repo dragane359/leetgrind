@@ -7,7 +7,6 @@ export const fetchAllFlashcards = async () => {
 };
 
 export const fetchFilteredFlashcards = async (filters) => {
-  console.log(filters)
   const res = await fetch(`${API_BASE}/filtered_flashcards`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
